@@ -42,9 +42,9 @@ namespace AppSample
                 var json_data = string.Empty;
                 try
                 {
-                    string app_id = "05933d06",
-                        app_key = "5aebf0f9a50dd6f8c52343cd5c3b61aa";
-                    var url = "https://api.cityofnewyork.us/geoclient/v1/address";
+                    string app_id = "<APP_ID>",
+                        app_key = "<APP_KEY>";
+                    var url = "<URL>";
                     var uri = new Uri(string.Format($"{url}.json?houseNumber={hNo}&street={streetName}&borough={borough}&app_id={app_id}&app_key={app_key}", string.Empty));
 
                     json_data = webClient.DownloadString(uri);
@@ -86,7 +86,7 @@ namespace AppSample
         private static IEnumerable<GeoClientSource> ReadSQLData()
         {
             List<GeoClientSource> requestData = new List<GeoClientSource>();
-            SqlConnection con = new SqlConnection(@"Data Source=PC0013103;Initial Catalog=NetSamples;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=<SOURCE>;Initial Catalog=<CATALOG>;Integrated Security=True");
             SqlCommand cmd = new SqlCommand("Select * from SRC_GEOCLIENT", con);
             cmd.Connection = con;
             try
@@ -121,7 +121,7 @@ namespace AppSample
 
         private static bool InsertSQLData(DataTable dtData)
         {
-            SqlConnection con = new SqlConnection(@"Data Source=PC0013103;Initial Catalog=NetSamples;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=<SOURCE>;Initial Catalog=<CATALOG>;Integrated Security=True");
             SqlCommand cmd = new SqlCommand("InsertGeoClientDestination", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@dtGeoClient", dtData);
